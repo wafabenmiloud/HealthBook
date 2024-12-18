@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <title>{% block title %}Symfony App{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ path('home') }}">MedApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('doctor_list') }}">Doctors</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('patient_list') }}">Patients</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('appointment_list') }}">Appointments</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Clinics</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+        <button class="btn btn-primary ml-3">Login</button>
+    </div>
+</nav>
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+        <footer class="bg-dark text-white mt-5 p-4 text-center">
+    <p>&copy; 2024 MedApp. All Rights Reserved.</p>
+    <div>
+        <a href="#" class="text-white">Privacy Policy</a> | 
+        <a href="#" class="text-white">Terms of Service</a>
+    </div>
+</footer>
     </body>
 </html>
