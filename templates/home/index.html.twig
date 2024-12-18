@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block body %}
+   
+<div class="jumbotron text-center">
+    <h1>Find Your Doctor or Clinic</h1>
+    <form class="form-inline justify-content-center mt-4">
+        <input class="form-control mr-2" type="search" placeholder="Search for doctors or clinics" aria-label="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>
+</div>
+<div class="container">
+    <h2 class="mt-5">Top Specialties</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Cardiology</h5>
+                    <p class="card-text">Find top cardiologists in your area.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Repeat for other specialties -->
+    </div>
+</div>
+
+
+{% endblock %}

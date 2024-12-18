@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Doctor List{% endblock %}
+
+{% block body %}
+    <h1>Doctor List</h1>
+    <ul>
+        {% for doctor in doctors %}
+            <li>
+                <a href="{{ path('doctor_view', {id: doctor.id}) }}">{{ doctor.name }} ({{ doctor.specialization }})</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

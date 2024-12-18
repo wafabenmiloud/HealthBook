@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Appointment Details{% endblock %}
+
+{% block body %}
+    <h1>Appointment Details</h1>
+    <p>Date: {{ appointment.date|date('Y-m-d H:i') }}</p>
+    <p>Status: {{ appointment.status }}</p>
+    <p>Patient: {{ appointment.patient.name }}</p>
+    <p>Doctor: Dr. {{ appointment.doctor.name }}</p>
+    <p>Clinic: {{ appointment.clinic.name }}</p>
+{% endblock %}

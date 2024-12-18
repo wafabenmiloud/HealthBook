@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patient Details{% endblock %}
+
+{% block body %}
+    <h1>Details for {{ patient.name }}</h1>
+    <p>Email: {{ patient.email }}</p>
+    <p>Phone: {{ patient.phone }}</p>
+    <p>Medical History: {{ patient.medicalHistory }}</p>
+{% endblock %}

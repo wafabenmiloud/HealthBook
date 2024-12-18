@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patient List{% endblock %}
+
+{% block body %}
+    <h1>Patient List</h1>
+    <ul>
+        {% for patient in patients %}
+            <li>
+                <a href="{{ path('patient_view', {id: patient.id}) }}">{{ patient.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
