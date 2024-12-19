@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Appointment{% endblock %}
+
+{% block body %}
+    <h1>Appointment Details</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ appointment.id }}</td>
+            </tr>
+            <tr>
+                <th>Date & Time</th>
+                <td>{{ appointment.date|date('Y-m-d H:i') }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ appointment.status }}</td>
+            </tr>
+          
+            <tr>
+                <th>Doctor</th>
+                <td>{{ appointment.doctor.name }}</td>
+            </tr>
+            <tr>
+                <th>Clinic</th>
+                <td>{{ appointment.clinic.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('appointment_list') }}" class="btn btn-secondary">Back to List</a>
+    <a href="{{ path('appointment_edit', { id: appointment.id }) }}" class="btn btn-warning">Edit</a>
+    <form method="post" action="{{ path('appointment_delete', { id: appointment.id }) }}" style="display:inline-block;">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ appointment.id) }}">
+        <button class="btn btn-danger">Delete</button>
+    </form>
+{% endblock %}

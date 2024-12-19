@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}MedApp - Your Health Companion{% endblock %}</title>
+    <title>{% block title %}HealthCare - Your Health Companion{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -17,6 +17,7 @@
         }
         .navbar {
             background-color: #9aa2dc; /* Green medical theme */
+            padding: 10px 4%
         }
         .navbar-brand {
             font-weight: bold;
@@ -77,7 +78,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="{{ path('home') }}">MedApp</a>
+        <a class="navbar-brand" href="{{ path('home') }}">HealthCare</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -85,70 +86,23 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ path('doctor_list') }}">Doctors</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('patient_list') }}">Patients</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('appointment_list') }}">Appointments</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Clinics</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+
+ {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                       <li class="nav-item"><a class="nav-link" href="{{ path('appointment_list') }}">Appointments</a></li>
+
+    {% endif %}
+
+               
             </ul>
-            <button class="btn btn-primary ml-3">Login</button>
+             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a class="btn btn-primary ml-3" href="{{ path('app_logout') }}">Logout</a>
+    {% else %}
+        <a class="btn btn-primary ml-3" href="{{ path('app_login') }}">Login</a>
+    {% endif %}
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Welcome to MedApp</h1>
-        <p>Your trusted partner in healthcare management</p>
-        <div class="hero-search-section text-white text-center py-5">
-    <div class="container">
-        <h1 class="display-4 font-weight-bold">Find the Best Doctors & Clinics</h1>
-        <p class="lead mt-3">Search by specialty, location, or name to get started on your healthcare journey.</p>
-        <form class="form-inline justify-content-center mt-4">
-            <div class="input-group w-75">
-                <input 
-                    type="search" 
-                    class="form-control form-control-lg" 
-                    placeholder="Search for doctors, clinics, or specialties" 
-                    aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-primary btn-lg" type="submit">Search</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="container mt-5">
-    <h2 class="text-center font-weight-bold mb-4">Top Specialties</h2>
-    <div class="row text-center">
-        <div class="col-md-4 mb-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <i class="fas fa-heartbeat fa-3x mb-3"></i>
-                    <h5 class="card-title">Cardiology</h5>
-                    <p class="card-text">Find top cardiologists in your area.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <i class="fas fa-brain fa-3x mb-3"></i>
-                    <h5 class="card-title">Neurology</h5>
-                    <p class="card-text">Expert care for neurological disorders.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <i class="fas fa-stethoscope fa-3x mb-3"></i>
-                    <h5 class="card-title">General Medicine</h5>
-                    <p class="card-text">Comprehensive primary care for all ages.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    </section>
+   
 
     <!-- Main Content -->
     <div class="container">
@@ -156,12 +110,47 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-white mt-5 p-4 text-center">
-        <p>&copy; 2024 MedApp. All Rights Reserved.</p>
-        <div>
-            <a href="#">Privacy Policy</a> | 
-            <a href="#">Terms of Service</a>
+    <footer class="text-white mt-5">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>About HealthCare</h5>
+                <p>
+                    HealthCare is your trusted health companion, connecting you with the best healthcare services and professionals. Your health, our priority.
+                </p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ path('home') }}" class="text-white">Home</a></li>
+                    <li><a href="{{ path('doctor_list') }}" class="text-white">Doctors</a></li>
+                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                    <li><a href="{{ path('appointment_list') }}" class="text-white">Appointments</a></li>
+                        {% endif %}
+
+                </ul>
+            </div>
+            <div class="col-md-4 text-center">
+                <h5>Follow Us</h5>
+                <div>
+                    <a href="#" class="text-white mx-2"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                </div>
+            </div>
         </div>
-    </footer>
+        <hr class="bg-white">
+        <div class="text-center">
+            <p>&copy; 2024 HealthCare. All Rights Reserved.</p>
+            <p>
+                <a href="#" class="text-white">Privacy Policy</a> |
+                <a href="#" class="text-white">Terms of Service</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>

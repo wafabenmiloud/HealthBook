@@ -3,6 +3,23 @@
 {% block title %}Doctor List{% endblock %}
 
 {% block body %}
+<div class="container">
+    <form class="form-inline justify-content-center mt-4" method="get" action="{{ path('doctor_list') }}">
+        <div class="input-group w-75">
+            <input 
+                type="search" 
+                name="search" 
+                class="form-control form-control-lg" 
+                placeholder="Search for doctors by name" 
+                value="{{ app.request.get('search') }}" 
+                aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn-primary btn-lg" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="container mt-5">
     <h1 class="text-primary mb-4">Doctors</h1>
     {% if doctors|length > 0 %}
@@ -27,7 +44,7 @@
         </div>
     {% else %}
         <div class="alert alert-warning">
-            <strong>No doctors found.</strong> Add a doctor to get started!
+            <strong>No doctors found.</strong> Try searching with different keywords!
         </div>
     {% endif %}
 </div>

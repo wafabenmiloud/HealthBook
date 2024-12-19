@@ -3,24 +3,39 @@
 {% block title %}Appointment List{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h1 class="text-primary mb-4">Appointments</h1>
-    {% if appointments|length > 0 %}
-        <ul class="list-group">
+    <h1>Appointment List</h1>
+    <a href="{{ path('appointment_new') }}" class="btn btn-primary mb-3">Create New Appointment</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Clinic</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for appointment in appointments %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong>{{ appointment.date|date('Y-m-d H:i') }}</strong> with 
-                        <span class="text-success">Dr. {{ appointment.doctor.name }}</span>
-                    </div>
-                    <a href="{{ path('appointment_view', {id: appointment.id}) }}" class="btn btn-outline-primary btn-sm">View Details</a>
-                </li>
+                <tr>
+                    <td>{{ appointment.id }}</td>
+                    <td>{{ appointment.date|date('Y-m-d H:i') }}</td>
+                    <td>{{ appointment.status }}</td>
+                    <td>{{ appointment.doctor.name }}</td>
+                    <td>{{ appointment.clinic.name }}</td>
+                    <td>
+                        <a href="{{ path('appointment_show', { id: appointment.id }) }}" class="btn btn-sm btn-info">View</a>
+                        <a href="{{ path('appointment_edit', { id: appointment.id }) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <form method="post" action="{{ path('appointment_delete', { id: appointment.id }) }}" style="display:inline-block;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ appointment.id) }}">
+                            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
             {% endfor %}
-        </ul>
-    {% else %}
-        <div class="alert alert-warning mt-4">
-            <strong>No appointments found.</strong> Schedule one to get started!
-        </div>
-    {% endif %}
-</div>
+        </tbody>
+    </table>
 {% endblock %}
