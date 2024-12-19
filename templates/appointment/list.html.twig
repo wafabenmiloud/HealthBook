@@ -3,14 +3,24 @@
 {% block title %}Appointment List{% endblock %}
 
 {% block body %}
-    <h1>Appointment List</h1>
-    <ul>
-        {% for appointment in appointments %}
-            <li>
-                <a href="{{ path('appointment_view', {id: appointment.id}) }}">
-                    Appointment on {{ appointment.date|date('Y-m-d H:i') }} with Dr. {{ appointment.doctor.name }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+<div class="container mt-5">
+    <h1 class="text-primary mb-4">Appointments</h1>
+    {% if appointments|length > 0 %}
+        <ul class="list-group">
+            {% for appointment in appointments %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ appointment.date|date('Y-m-d H:i') }}</strong> with 
+                        <span class="text-success">Dr. {{ appointment.doctor.name }}</span>
+                    </div>
+                    <a href="{{ path('appointment_view', {id: appointment.id}) }}" class="btn btn-outline-primary btn-sm">View Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-warning mt-4">
+            <strong>No appointments found.</strong> Schedule one to get started!
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

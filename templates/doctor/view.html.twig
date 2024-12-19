@@ -1,10 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Doctor Details{% endblock %}
+{% block title %}Doctor Profile{% endblock %}
 
 {% block body %}
-    <h1>{{ doctor.name }}</h1>
-    <p>Specialization: {{ doctor.specialization }}</p>
-    <p>Email: {{ doctor.email }}</p>
-    <p>Phone: {{ doctor.phone }}</p>
+<div class="container mt-5">
+    <h1 class="text-primary mb-4">Doctor Profile</h1>
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5>{{ doctor.name }}</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+            <p><strong>Email:</strong> {{ doctor.email }}</p>
+            <p><strong>Phone:</strong> {{ doctor.phone }}</p>
+        </div>
+        <div class="card-footer text-end">
+            <a href="{{ path('doctor_list') }}" class="btn btn-outline-primary">Back to List</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

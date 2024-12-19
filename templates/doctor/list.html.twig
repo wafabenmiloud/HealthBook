@@ -3,12 +3,32 @@
 {% block title %}Doctor List{% endblock %}
 
 {% block body %}
-    <h1>Doctor List</h1>
-    <ul>
-        {% for doctor in doctors %}
-            <li>
-                <a href="{{ path('doctor_view', {id: doctor.id}) }}">{{ doctor.name }} ({{ doctor.specialization }})</a>
-            </li>
-        {% endfor %}
-    </ul>
+<div class="container mt-5">
+    <h1 class="text-primary mb-4">Doctors</h1>
+    {% if doctors|length > 0 %}
+        <div class="row">
+            {% for doctor in doctors %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">{{ doctor.name }}</h5>
+                            <p class="card-text">
+                                <strong>Specialization:</strong> {{ doctor.specialization }}<br>
+                                <strong>Email:</strong> {{ doctor.email }}<br>
+                                <strong>Phone:</strong> {{ doctor.phone }}
+                            </p>
+                            <a href="{{ path('doctor_view', {id: doctor.id}) }}" class="btn btn-primary btn-sm">
+                                View Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            <strong>No doctors found.</strong> Add a doctor to get started!
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

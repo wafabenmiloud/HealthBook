@@ -3,12 +3,31 @@
 {% block title %}Patient List{% endblock %}
 
 {% block body %}
-    <h1>Patient List</h1>
-    <ul>
-        {% for patient in patients %}
-            <li>
-                <a href="{{ path('patient_view', {id: patient.id}) }}">{{ patient.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+<div class="container mt-5">
+    <h1 class="text-primary mb-4">Patients</h1>
+    {% if patients|length > 0 %}
+        <div class="row">
+            {% for patient in patients %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">{{ patient.name }}</h5>
+                            <p class="card-text">
+                                <strong>Email:</strong> {{ patient.email }}<br>
+                                <strong>Phone:</strong> {{ patient.phone }}
+                            </p>
+                            <a href="{{ path('patient_view', {id: patient.id}) }}" class="btn btn-primary btn-sm">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            <strong>No patients found.</strong> Add a patient to get started!
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

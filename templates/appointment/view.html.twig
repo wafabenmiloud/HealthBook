@@ -3,10 +3,26 @@
 {% block title %}Appointment Details{% endblock %}
 
 {% block body %}
-    <h1>Appointment Details</h1>
-    <p>Date: {{ appointment.date|date('Y-m-d H:i') }}</p>
-    <p>Status: {{ appointment.status }}</p>
-    <p>Patient: {{ appointment.patient.name }}</p>
-    <p>Doctor: Dr. {{ appointment.doctor.name }}</p>
-    <p>Clinic: {{ appointment.clinic.name }}</p>
+<div class="container mt-5">
+    <h1 class="text-primary mb-4">Appointment Details</h1>
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5>Appointment Information</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Date:</strong> {{ appointment.date|date('Y-m-d H:i') }}</p>
+            <p><strong>Status:</strong> 
+                <span class="badge {% if appointment.status == 'confirmed' %}bg-success{% else %}bg-secondary{% endif %}">
+                    {{ appointment.status|capitalize }}
+                </span>
+            </p>
+            <p><strong>Patient:</strong> {{ appointment.patient.name }}</p>
+            <p><strong>Doctor:</strong> Dr. {{ appointment.doctor.name }}</p>
+            <p><strong>Clinic:</strong> {{ appointment.clinic.name }}</p>
+        </div>
+        <div class="card-footer text-end">
+            <a href="{{ path('appointment_list') }}" class="btn btn-outline-primary">Back to List</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
